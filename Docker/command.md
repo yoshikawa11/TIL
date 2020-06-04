@@ -8,6 +8,8 @@
 - コンテナを実行すると自動的にroot権限になる
 - 指定しない限りコンテナからホストOSにアクセスできない
 - コンテナ名はランダムに設定される、オプションで指定可能
+- docker imageの共有はDockerレポジトリにレポを作る(レポジトリ名とイメージ名は同じもの)
+- imageとレポジトリを同一にし、tagでバージョン管理を行う
 
 ### コマンド
 - $docker login :ログイン
@@ -22,3 +24,10 @@
 - $ctrl + p + q :depatchしてコンテナから抜ける(コンテナは起動したまま)※detachすると，そのプロセスは残る．detach後に再度$docker execでコンテナに入って                      exitしても，前にdetachしたプロセスは残り続ける．なのでExitedにならない．detachした時のそのプロセスに戻るには$docker attach ｛コンテナ                      名/ID｝を実行し、そこでexitするとStatusがExitedになる。
                  execは新規プロセスを利用する。
 - $docker exec -it {コンテナ名} bash :動いているコンテナに入る
+- $docker commit {コンテナ名} {イメージ名} :コンテナをimage化
+- $docker tag {旧IMAGE名:旧TAG名} {新IMAGE名:新TAG名} ：新しいイメージ名，タグ名で保存
+- $docker push イメージ名(リポジトリ名) ：imageをpush
+- $docker rmi {イメージ名} :対象のイメージを削除
+
+### 詰まりポイント
+- イメージを削除できない : $docker rmi {イメージ名} を実行するとコンテナが存在するせいでエラーになる。$docker rm {コンテナID} でコンテナを削除してからイメージを削除する
