@@ -5,11 +5,18 @@
 - Docker image:コンテナを作るために必要なもの。配布や携帯ができる。Docker imageはimage layerから構成される。
                layerごとに更新・追加されることでコンテナ間で共有・省エネとなる
 - Docker file:Docker imageの設計書、textファイル
-- コンテナを実行すると自動的にroot権限になる
+- コンテナを実行するとデフォルトでroot権限になる
 - 指定しない限りコンテナからホストOSにアクセスできない
 - コンテナ名はランダムに設定される、オプションで指定可能
 - docker imageの共有はDockerレポジトリにレポを作る(レポジトリ名とイメージ名は同じもの)
 - imageとレポジトリを同一にし、tagでバージョン管理を行う
+
+### 運用方針
+- コンテナを更新するときはなるべくDockerfileをメンテする
+- Dockerfileは基本Dockerfileという名前にする
+- Dockerfileを更新するときは最後の行に追加する(行ごとにlayerが作成される)
+- Dockerfileをビルドするには保存されているフォルダに移動し $docker build . を実行する
+
 
 ### コマンド
 - $docker login :ログイン
@@ -28,6 +35,8 @@
 - $docker tag {旧IMAGE名:旧TAG名} {新IMAGE名:新TAG名} ：新しいイメージ名，タグ名で保存
 - $docker push イメージ名(リポジトリ名) ：imageをpush
 - $docker rmi {イメージ名} :対象のイメージを削除
+- $docker build . :Docker fileをビルドする
 
 ### 詰まりポイント
 - イメージを削除できない : $docker rmi {イメージ名} を実行するとコンテナが存在するせいでエラーになる。$docker rm {コンテナID} でコンテナを削除してからイメージを削除する
+- Docker fileをビルドできない(deamonを起動していないエラーメッセージ): Dockerを起動する
