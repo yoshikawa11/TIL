@@ -1,5 +1,7 @@
-変数宣言は`const`、`let`。
-```
+* 変数宣言は`const`、`let`
+  * 再代入するのなら`let`を、そうでないなら`const`を利用する
+
+```ts
 // constは再代入不可
 const name = "小動物";
 name = "哺乳類";  // Cannot assign to 'name1' because it is a constant.(2588)
