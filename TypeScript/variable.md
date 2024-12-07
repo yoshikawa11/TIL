@@ -1,5 +1,8 @@
+## 変数宣言
+
 * 変数宣言は`const`、`let`
   * 再代入するのなら`let`を、そうでないなら`const`を利用する
+  * `var` を使ってはいけない。スコープや変数の巻き上げの挙動が広く意図しない結果を生む
 
 ```ts
 // constは再代入不可
@@ -34,3 +37,18 @@ console.log(obj); // { "a": 2 }
 // obj.b = 1;  Property 'b' does not exist on type '{ a: number; }'.
 // obj = {a : 4}; Cannot assign to 'obj' because it is a constant.
 ```
+
+
+## 型注釈
+
+* 変数宣言時に変数に代入可能な値を指定できる
+  * 型推論により、型の不一致はコンパイルエラーになる
+
+```ts
+const num: number = 100;
+let SecondName: String = "佐藤";
+// SecondName = 110; Type 'number' is not assignable to type 'String'.
+```
+
+* 型推論はコンパイルの時点で型が決定され、その後は変更されない。対して、動的型付けは実行時に型が決定される。
+実行のたびに型が変更される。
