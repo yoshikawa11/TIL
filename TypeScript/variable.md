@@ -20,3 +20,16 @@ console.log(name2);
 const name3 = mode === "slack" ? "小型犬" : "小動物";
 console.log(name3);
 ```
+
+* `const`はあくまで再代入を禁止するもので、オブジェクトの要素の変更はできる。
+
+```ts
+const obj = { a: 1 };
+// obj = { a: 2 }; 　Cannot assign to 'obj' because it is a constant.
+obj.a = 2;
+console.log(obj.a);
+console.log(obj); // { "a": 2 }
+
+// obj.b = 1;  Property 'b' does not exist on type '{ a: number; }'.
+// obj = {a : 4}; Cannot assign to 'obj' because it is a constant.
+```
